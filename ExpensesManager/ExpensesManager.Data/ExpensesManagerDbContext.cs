@@ -19,8 +19,6 @@ namespace ExpensesManager.Data
             _configuration = configuration;
         }
 
-        public ExpensesManagerDbContext() { }
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseNpgsql(_configuration.GetConnectionString("PostgresExpensesManagerDB"));
