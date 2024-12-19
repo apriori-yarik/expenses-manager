@@ -26,6 +26,11 @@ namespace ExpensesManager.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Expense>()
+                .HasOne(x => x.User)
+                .WithMany(x => x.Expenses)
+                .HasForeignKey(x => x.UserId);
+                
             modelBuilder.SeedData();
         }
 
