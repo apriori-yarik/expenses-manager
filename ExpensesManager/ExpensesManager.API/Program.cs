@@ -3,6 +3,7 @@ using ExpensesManager.Data.Repositories;
 using ExpensesManager.Domain.Repositories;
 using ExpensesManager.Domain.Services;
 using ExpensesManager.DomainServices;
+using ExpensesManager.DomainServices.BackgroundServices;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +12,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddScoped<IUsersRepository, UsersRepository>();
 builder.Services.AddScoped<IUsersService, UsersService>();
+
+builder.Services.AddSingleton<ILogger>(s => s.GetRequiredService<ILogger<Program>>());
+
+builder.Services.AddHostedService<TestService>();
+
+
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
