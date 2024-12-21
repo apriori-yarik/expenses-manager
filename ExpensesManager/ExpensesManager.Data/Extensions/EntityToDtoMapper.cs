@@ -30,9 +30,9 @@ namespace ExpensesManager.Data.Extensions
             }
         }
 
-        public static ExpensesExtendedDto ToExpensesDto(this Expense expense)
+        public static ExpenseExtendedDto ToExpensesDto(this Expense expense)
         {
-            return new ExpensesExtendedDto()
+            return new ExpenseExtendedDto()
             {
                 Id = expense.Id,
                 ExpenseType = expense.ExpenseType,

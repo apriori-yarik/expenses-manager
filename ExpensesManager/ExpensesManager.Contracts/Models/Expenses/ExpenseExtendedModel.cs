@@ -1,26 +1,19 @@
 ﻿using ExpensesManager.Contracts.Enums;
+using ExpensesManager.Contracts.Models.Users;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ExpensesManager.Data.Entities
+namespace ExpensesManager.Contracts.Models.Expenses
 {
-    public class Expense : BaseEntityWithId
+    public class ExpenseExtendedModel
     {
-        [Required]
-        [MaxLength(80)]
+        public int Id { get; set; }
         public string Name { get; set; }
-
-        [Required]
         public ExpenseType ExpenseType { get; set; }
-
-        [Required]
         public decimal Amount { get; set; }
-
-        public int UserId { get; set; }
-        public User User { get; set; }
+        public UserModelWithId User { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using ExpensesManager.Contracts.Models.Users;
+﻿using ExpensesManager.Contracts.Models.Expenses;
+using ExpensesManager.Contracts.Models.Users;
 using ExpensesManager.Domain.Dtos;
 using System;
 using System.Collections.Generic;
@@ -22,11 +23,31 @@ namespace ExpensesManager.DomainServices.Extensions
             };
         }
 
-        public static IEnumerable<UserModelWithId> ToUserModeWithId(this List<UserDtoWithId> dto)
+        public static IEnumerable<UserModelWithId> ToUserModeWithId(this List<UserDtoWithId> dtos)
         {
-            foreach (var user in dto)
+            foreach (var user in dtos)
             {
                 yield return user.ToUserModelWithId();
+            }
+        }
+
+        public static ExpenseExtendedModel ToExpenseModel(this ExpenseExtendedDto dto)
+        {
+            return new ExpenseExtendedModel()
+            {
+                Name = dto.Name,
+                Amount = dto.Amount,
+                ExpenseType = dto.ExpenseType,
+                User = dto.User.ToUserModelWithId(),
+                Id = dto.Id
+            };
+        }
+
+        public static IEnumerable<ExpenseExtendedModel> ToUserModeWithId(this List<ExpenseExtendedDto> dtos)
+        {
+            foreach (var expense in dtos)
+            {
+                yield return expense.ToExpenseModel();
             }
         }
     }

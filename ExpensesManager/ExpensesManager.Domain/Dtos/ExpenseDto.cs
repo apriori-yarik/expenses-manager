@@ -7,12 +7,10 @@ using System.Threading.Tasks;
 
 namespace ExpensesManager.Domain.Dtos
 {
-    public class ExpensesExtendedDto
+    public class ExpenseDto
     {
-        public int Id { get; set; }
         public string Name { get; set; }
         public ExpenseType ExpenseType { get; set; }
         public decimal Amount { get; set; }
-        public UserDtoWithId User { get; set; }
     }
 }

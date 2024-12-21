@@ -10,6 +10,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddScoped<IUsersRepository, UsersRepository>();
+builder.Services.AddScoped<IExpensesRepository, ExpensesRepository>();
+
 builder.Services.AddScoped<IUsersService, UsersService>();
 
 builder.Services.AddControllers();
