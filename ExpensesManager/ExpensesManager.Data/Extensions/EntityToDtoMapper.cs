@@ -38,7 +38,7 @@ namespace ExpensesManager.Data.Extensions
                 ExpenseType = expense.ExpenseType,
                 Amount = expense.Amount,
                 Name = expense.Name,
-                User = expense.User.ToUserDto(),
+                User = expense.User?.ToUserDto(),
             };
         }
     }

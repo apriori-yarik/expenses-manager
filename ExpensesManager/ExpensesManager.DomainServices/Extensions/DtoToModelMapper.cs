@@ -38,7 +38,7 @@ namespace ExpensesManager.DomainServices.Extensions
                 Name = dto.Name,
                 Amount = dto.Amount,
                 ExpenseType = dto.ExpenseType,
-                User = dto.User.ToUserModelWithId(),
+                User = dto.User?.ToUserModelWithId(),
                 Id = dto.Id
             };
         }

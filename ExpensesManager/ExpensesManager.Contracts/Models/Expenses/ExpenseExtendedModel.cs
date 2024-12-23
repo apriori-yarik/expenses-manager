@@ -14,6 +14,6 @@ namespace ExpensesManager.Contracts.Models.Expenses
         public string Name { get; set; }
         public ExpenseType ExpenseType { get; set; }
         public decimal Amount { get; set; }
-        public UserModelWithId User { get; set; }
+        public UserModelWithId? User { get; set; }
     }
 }

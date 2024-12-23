@@ -32,5 +32,24 @@ namespace ExpensesManager.DomainServices
 
             return dtos.ToUserModeWithId().ToList();
         }
+
+        public async Task<ExpenseExtendedModel> CreateAsync(ExpenseModel model)
+        {
+            var dto = await _expensesRepository.CreateAsync(model.ToExpenseDto());
+
+            return dto.ToExpenseModel();
+        }
+
+        public async Task DeleteAsync(int id)
+        {
+            await _expensesRepository.DeleteAsync(id);
+        }
+
+        public async Task<ExpenseExtendedModel?> UpdateAsync(int id, ExpenseModelWithUserId model)
+        {
+            var dto = await _expensesRepository.UpdateAsync(id, model.ToExpenseDto());
+
+            return dto?.ToExpenseModel();
+        }
     }
 }

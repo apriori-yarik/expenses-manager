@@ -13,6 +13,6 @@ namespace ExpensesManager.Domain.Dtos
         public string Name { get; set; }
         public ExpenseType ExpenseType { get; set; }
         public decimal Amount { get; set; }
-        public UserDtoWithId User { get; set; }
+        public UserDtoWithId? User { get; set; }
     }
 }

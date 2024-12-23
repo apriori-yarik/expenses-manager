@@ -13,6 +13,7 @@ builder.Services.AddScoped<IUsersRepository, UsersRepository>();
 builder.Services.AddScoped<IExpensesRepository, ExpensesRepository>();
 
 builder.Services.AddScoped<IUsersService, UsersService>();
+builder.Services.AddScoped<IExpensesService, ExpensesService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

@@ -31,14 +31,14 @@ namespace ExpensesManager.Data.Extensions
             };
         }
 
-        public static Expense ToExpense(this ExpenseDtoWithId expenseDto)
+        public static Expense ToExpense(this ExpenseDtoWithUserId expenseDto)
         {
             return new Expense()
             {
-                Id = expenseDto.Id,
                 Name = expenseDto.Name,
                 Amount = expenseDto.Amount,
-                ExpenseType = expenseDto.ExpenseType
+                ExpenseType = expenseDto.ExpenseType,
+                UserId = expenseDto.UserId
             };
         }
     }

@@ -13,6 +13,6 @@ namespace ExpensesManager.Domain.Repositories
         Task DeleteAsync(int id);
         Task<List<ExpenseExtendedDto>> GetAllAsync();
         Task<ExpenseExtendedDto?> GetByIdAsync(int id);
-        Task<ExpenseExtendedDto?> UpdateAsync(int id, ExpenseDtoWithId expenseDto);
+        Task<ExpenseExtendedDto?> UpdateAsync(int id, ExpenseDtoWithUserId expenseDto);
     }
 }

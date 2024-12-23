@@ -61,7 +61,7 @@ namespace ExpensesManager.Data.Repositories
             return entity.Entity.ToExpensesDto();
         }
 
-        public async Task<ExpenseExtendedDto?> UpdateAsync(int id, ExpenseDtoWithId expenseDto)
+        public async Task<ExpenseExtendedDto?> UpdateAsync(int id, ExpenseDtoWithUserId expenseDto)
         {
             using var context = await _dbContextFactory.CreateDbContextAsync();
 

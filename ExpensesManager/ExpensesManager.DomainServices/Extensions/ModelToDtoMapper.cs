@@ -1,4 +1,5 @@
-﻿using ExpensesManager.Contracts.Models.Users;
+﻿using ExpensesManager.Contracts.Models.Expenses;
+using ExpensesManager.Contracts.Models.Users;
 using ExpensesManager.Domain.Dtos;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,27 @@ namespace ExpensesManager.DomainServices.Extensions
                 LastName = model.LastName,
                 DateOfBirth = model.DateOfBirth,
                 Email = model.Email,
+            };
+        }
+
+        public static ExpenseDto ToExpenseDto(this ExpenseModel expenseModel)
+        {
+            return new ExpenseDto()
+            {
+                Name = expenseModel.Name,
+                ExpenseType = expenseModel.ExpenseType,
+                Amount = expenseModel.Amount
+            };
+        }
+
+        public static ExpenseDtoWithUserId ToExpenseDto(this ExpenseModelWithUserId model)
+        {
+            return new ExpenseDtoWithUserId()
+            {
+                Name = model.Name,
+                ExpenseType = model.ExpenseType,
+                Amount = model.Amount,
+                UserId = model.UserId
             };
         }
     }
