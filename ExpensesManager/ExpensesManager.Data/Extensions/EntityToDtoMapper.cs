@@ -29,5 +29,17 @@ namespace ExpensesManager.Data.Extensions
                 yield return user.ToUserDto();
             }
         }
+
+        public static ExpenseExtendedDto ToExpensesDto(this Expense expense)
+        {
+            return new ExpenseExtendedDto()
+            {
+                Id = expense.Id,
+                ExpenseType = expense.ExpenseType,
+                Amount = expense.Amount,
+                Name = expense.Name,
+                User = expense.User?.ToUserDto(),
+            };
+        }
     }
 }
