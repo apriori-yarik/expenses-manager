@@ -11,6 +11,7 @@ namespace ExpensesManager.Domain.Services
     {
         Task<ExpenseExtendedModel> CreateAsync(ExpenseModel model);
         Task DeleteAsync(int id);
+        Task<byte[]> ExportPdfAsync(int userId);
         Task<List<ExpenseExtendedModel>> GetAllAsync();
         Task<ExpenseExtendedModel?> GetByIdAsync(int id);
         Task<ExpenseExtendedModel?> UpdateAsync(int id, ExpenseModelWithUserId model);
