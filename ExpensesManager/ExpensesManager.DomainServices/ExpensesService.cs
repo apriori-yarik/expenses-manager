@@ -60,6 +60,21 @@ namespace ExpensesManager.DomainServices
         {
             var template = await File.ReadAllTextAsync(Path.Combine("HtmlTemplates", "expensesReport.html"));
 
+            var expenses = await _expensesRepository.GetAllByUserIdAsync(userId);
+
+            var sb = new StringBuilder();
+
+            foreach (var item in expenses)
+            {
+                sb.AppendLine("<tr>");
+                sb.AppendLine($"<td>{item.Name}</td>");
+                sb.AppendLine($"<td>{item.ExpenseType.ToString()}</td>");
+                sb.AppendLine($"<td>{item.Amount}</td>");
+                sb.AppendLine("</tr>");
+            };
+
+            template = template.Replace("{{expenses}}", sb.ToString());
+
             var doc = new HtmlToPdfDocument()
             {
                 GlobalSettings = 
