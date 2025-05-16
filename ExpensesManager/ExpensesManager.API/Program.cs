@@ -4,6 +4,8 @@ using ExpensesManager.Domain.Repositories;
 using ExpensesManager.Domain.Services;
 using ExpensesManager.DomainServices;
 using Microsoft.EntityFrameworkCore;
+using WkHtmlToPdfDotNet;
+using WkHtmlToPdfDotNet.Contracts;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +16,9 @@ builder.Services.AddScoped<IExpensesRepository, ExpensesRepository>();
 
 builder.Services.AddScoped<IUsersService, UsersService>();
 builder.Services.AddScoped<IExpensesService, ExpensesService>();
+
+builder.Services.AddSingleton<ITools, PdfTools>();
+builder.Services.AddSingleton<IConverter, SynchronizedConverter>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

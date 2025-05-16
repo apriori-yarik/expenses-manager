@@ -10,6 +10,7 @@ namespace ExpensesManager.Data.Extensions
 {
     public static class EntityToDtoMapper
     {
+        #region Users
         public static UserDtoWithId ToUserDto(this User user)
         {
             return new UserDtoWithId()
@@ -29,8 +30,10 @@ namespace ExpensesManager.Data.Extensions
                 yield return user.ToUserDto();
             }
         }
+        #endregion
 
-        public static ExpenseExtendedDto ToExpensesDto(this Expense expense)
+        #region Expenses
+        public static ExpenseExtendedDto ToExpenseExtendedDto(this Expense expense)
         {
             return new ExpenseExtendedDto()
             {
@@ -41,5 +44,16 @@ namespace ExpensesManager.Data.Extensions
                 User = expense.User?.ToUserDto(),
             };
         }
+
+        public static ExpenseDto ToExpenseDto(this Expense expense)
+        {
+            return new ExpenseDto()
+            {
+                ExpenseType = expense.ExpenseType,
+                Amount = expense.Amount,
+                Name = expense.Name,
+            };
+        }
+        #endregion
     }
 }

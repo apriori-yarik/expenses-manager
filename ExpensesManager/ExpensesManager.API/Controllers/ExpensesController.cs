@@ -65,5 +65,13 @@ namespace ExpensesManager.API.Controllers
 
             return Ok(user);
         }
+
+        [HttpGet("export")]
+        public async Task<IActionResult> ExportAsync([FromQuery] int userId)
+        {
+            var pdf = await _expensesService.ExportPdfAsync(userId);
+
+            return File(pdf, "application/pdf", "expenses.pdf");
+        }
     }
 }

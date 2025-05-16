@@ -9,6 +9,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.XPath;
 
 namespace ExpensesManager.Data.Repositories
 {
@@ -32,7 +33,7 @@ namespace ExpensesManager.Data.Repositories
                 // Explicit loading
                 await context.Entry(entity).Reference(x => x.User).LoadAsync();
 
-                return entity.ToExpensesDto();
+                return entity.ToExpenseExtendedDto();
             }
 
             return null;
@@ -46,7 +47,7 @@ namespace ExpensesManager.Data.Repositories
             var entities = context.Expenses
                 .AsNoTracking()
                 .Include(x => x.User)
-                .Select(x => x.ToExpensesDto());
+                .Select(x => x.ToExpenseExtendedDto());
 
             return await entities.ToListAsync();
         }
@@ -58,7 +59,7 @@ namespace ExpensesManager.Data.Repositories
             var entity = await context.Expenses.AddAsync(dto.ToExpense());
             await context.SaveChangesAsync();
 
-            return entity.Entity.ToExpensesDto();
+            return entity.Entity.ToExpenseExtendedDto();
         }
 
         public async Task<ExpenseExtendedDto?> UpdateAsync(int id, ExpenseDtoWithUserId expenseDto)
@@ -76,7 +77,7 @@ namespace ExpensesManager.Data.Repositories
             context.Expenses.Update(entity);
             await context.SaveChangesAsync();
 
-            return entity.ToExpensesDto();
+            return entity.ToExpenseExtendedDto();
         }
 
         public async Task DeleteAsync(int id)
@@ -84,6 +85,18 @@ namespace ExpensesManager.Data.Repositories
             using var context = await _dbContextFactory.CreateDbContextAsync();
 
             await context.Expenses.Where(x => x.Id == id).ExecuteDeleteAsync();
+        }
+
+        public async Task<List<ExpenseDto>> GetAllByUserIdAsync(int userId)
+        {
+            using var context = await _dbContextFactory.CreateDbContextAsync();
+
+            var result = await context.Expenses
+                .Where(x => x.UserId == userId)
+                .Select(x => x.ToExpenseDto())
+                .ToListAsync();
+
+            return result;
         }
     }
 }
