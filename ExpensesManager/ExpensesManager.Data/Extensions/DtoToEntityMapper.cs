@@ -20,5 +20,26 @@ namespace ExpensesManager.Data.Extensions
                 Email = userDto.Email,
             };
         }
+
+        public static Expense ToExpense(this ExpenseDto expenseDto)
+        {
+            return new Expense()
+            {
+                Name = expenseDto.Name,
+                Amount = expenseDto.Amount,
+                ExpenseType = expenseDto.ExpenseType
+            };
+        }
+
+        public static Expense ToExpense(this ExpenseDtoWithUserId expenseDto)
+        {
+            return new Expense()
+            {
+                Name = expenseDto.Name,
+                Amount = expenseDto.Amount,
+                ExpenseType = expenseDto.ExpenseType,
+                UserId = expenseDto.UserId
+            };
+        }
     }
 }
