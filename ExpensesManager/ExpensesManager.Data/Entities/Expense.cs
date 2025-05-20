@@ -22,5 +22,7 @@ namespace ExpensesManager.Data.Entities
 
         public int? UserId { get; set; }
         public User User { get; set; }
+
+        public ICollection<Limit> Limits { get; set; }
     }
 }
