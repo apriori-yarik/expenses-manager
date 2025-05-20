@@ -14,6 +14,9 @@ namespace ExpensesManager.Data
     {
         private readonly IConfiguration _configuration;
 
+        // Needed for EF Core
+        public ExpensesManagerDbContext() { }
+
         public ExpensesManagerDbContext(IConfiguration configuration)
         {
             _configuration = configuration;
@@ -26,10 +29,16 @@ namespace ExpensesManager.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Expense>()
-                .HasOne(x => x.User)
-                .WithMany(x => x.Expenses)
-                .HasForeignKey(x => x.UserId);
+            modelBuilder.Entity<Expense>(x =>
+            {
+                x.HasOne(y => y.User)
+                .WithMany(y => y.Expenses)
+                .HasForeignKey(y => y.UserId);
+
+                x.HasMany(y => y.Limits)
+                .WithOne(y => y.Expense)
+                .HasForeignKey(y => y.ExpenseId);
+            });
                 
             modelBuilder.SeedData();
         }
@@ -37,5 +46,7 @@ namespace ExpensesManager.Data
         public DbSet<User> Users { get; set; }
 
         public DbSet<Expense> Expenses { get; set; }
+
+        public DbSet<Limit> Limits { get; set; }
     }
 }
